@@ -6,6 +6,8 @@ curl /etc/*-release
 ```
 ## Install InfluxDB
 
+[https://portal.influxdata.com/downloads/](https://portal.influxdata.com/downloads/)
+
 ```
 wget -qO- https://repos.influxdata.com/influxdb.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/influxdb.gpg > /dev/null
 
@@ -17,7 +19,7 @@ sudo apt-get update && sudo apt-get install influxdb2
 
 ```
 
-## Install Tel
+## Install Telegraf
 ```
 wget https://dl.influxdata.com/telegraf/releases/telegraf_1.21.1-1_amd64.deb
 
