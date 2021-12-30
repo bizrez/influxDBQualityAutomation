@@ -53,16 +53,18 @@ sudo dpkg -i telegraf_1.21.1-1_amd64.deb
 ```
 # The influxdb portal will have a telgraf setup wizard, that will crate:1) telegraph.conf and the below executable command line. You will have to insure the ports are open for the telgraph service.
 
-
 telegraf --config https://mallond-bizrez-influxdbqualityautomation-jrwvr7x2j7x-8086.githubpreview.dev/api/v2/telegrafs/08ae1cc4cce14000
 ```
-
-
-
 
 
 ## InfluxDB Commands
 ```
 show databases
 exit
+```
+
+## Graphana Install
+```
+# Run Graphana
+sudo service grafana-server status
 ```
