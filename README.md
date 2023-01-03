@@ -76,6 +76,16 @@ curl --request POST \
     airSensors,sensor_id=TLM0202 temperature=75.30007505999716,humidity=35.651929918691714,co=0.5141876544505826 1630424257000000000
     '
 ```
+### Data Concept
+```
+<measurement>,<tag>[,<tags>] <field>[,<field>] <timestamp>
+weather,location=us-midwest temperature=82 1465839830100400200
+
+XRay Example
+test-name, type=automation, definition=api-test01, test-executed=24 test-pass=20, test-fail=4
+
+
+```
 ### InfluxDB Downsampling ad Tasks
 [https://docs.influxdata.com/influxdb/v2.1/process-data/common-tasks/downsample-data/](https://docs.influxdata.com/influxdb/v2.1/process-data/common-tasks/downsample-data/)
 
