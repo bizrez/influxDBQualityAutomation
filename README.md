@@ -76,16 +76,53 @@ curl --request POST \
     airSensors,sensor_id=TLM0202 temperature=75.30007505999716,humidity=35.651929918691714,co=0.5141876544505826 1630424257000000000
     '
 ```
+
 ### Data Concept
 ```
-<measurement>,<tag>[,<tags>] <field>[,<field>] <timestamp>
-weather,location=us-midwest temperature=82 1465839830100400200
+Line Protocal
+Syntax:
 
-XRay Example
-test-name, type=automation, definition=api-test01, test-executed=24 test-pass=20, test-fail=4
+measurementName,tagKey=tagValue fieldKey="fieldValue" 1465839830100400200
+--------------- --------------- --------------------- -------------------
+       |               |                  |                    |
+  Measurement       Tag set           Field set            Timestamp
+Example:
+
+myMeasurement,tag1=value1,tag2=value2 fieldKey="fieldValue"  
+
+
+
+XRay Example/JUnit Results
+
+Time Interval #1
+register,testrun=001 executed=10,pass=10,fail=0
+register,testrun=002 executed=10,pass=10,fail=0
+register,testrun=003 executed=10,pass=10,fail=0
+
+Time Interval #2
+register,testrun=001 executed=10,pass=5,fail=5
+register,testrun=002 executed=10,pass=10,fail=0
+register,testrun=003 executed=10,pass=1,fail=9
+
+Time Interval #3
+register,testrun=001 executed=10,pass=10,fail=0
+register,testrun=002 executed=10,pass=10,fail=0
+register,testrun=003 executed=10,pass=10,fail=0
+
+
+Executed 365 days
+
+<img width="341" alt="image" src="https://user-images.githubusercontent.com/993459/210431517-69e87edc-30b3-491c-adcd-b6b667cdd44b.png">
+
+<img width="341" alt="image" src="https://user-images.githubusercontent.com/993459/210431916-20df4bfa-1231-47ab-b906-e167d06beebc.png">
+
+<img width="341" alt="image" src="https://user-images.githubusercontent.com/993459/210431988-3121fa97-2dfb-4671-9619-1128600dfc40.png">
+
 
 
 ```
+
+
 ### InfluxDB Downsampling ad Tasks
 [https://docs.influxdata.com/influxdb/v2.1/process-data/common-tasks/downsample-data/](https://docs.influxdata.com/influxdb/v2.1/process-data/common-tasks/downsample-data/)
 
