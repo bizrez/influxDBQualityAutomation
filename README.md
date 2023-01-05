@@ -76,8 +76,10 @@ show databases
 exit
 ```
 
-### InfluxDB API Write
+### REST API
 [https://docs.influxdata.com/influxdb/v2.1/write-data/developer-tools/api/](https://docs.influxdata.com/influxdb/v2.1/write-data/developer-tools/api/)
+
+InfluxDB API Write
 ```
 curl --request POST \
 "https://us-east-1-1.aws.cloud2.influxdata.com/api/v2/write?org=52dc5555563fd3fb&data&precision=ns" \
@@ -85,6 +87,12 @@ curl --request POST \
   --header "Content-Type: text/plain; charset=utf-8" \
   --header "Accept: application/json" \
   --data-binary 'register,testrun=001 executed=10,pass=10,fail=0'
+```
+Get Buckets
+```
+curl --location --request GET 'https://us-east-1-1.aws.cloud2.influxdata.com/api/v2/buckets' \
+--header 'Authorization: Token vvvvvvP4MJ-zpQYAQE21mQTADV-LjP__Hl3veAwv_jXaFajvXcqR3zHA==' \
+--data-raw ''
 ```
 
 ### Data Concept
