@@ -1,6 +1,19 @@
 # influxDB Quality Automation
 InfluxDB Playground with a QA Data Structure
 
+InfluxDB stores data in shard groups. Shard groups are organized by retention policy (RP) and store data with timestamps that fall within a specific time interval. The length of that time interval is called the shard group duration.
+
+**Encode meta data in Tags**  
+Tags are indexed and fields are not indexed. This means that queries on tags are more performant than those on fields.
+
+```
+Data encoded in tags
+-------------
+weather_sensor,crop=blueberries,plot=1,region=north temp=50.1 1472515200000000000
+weather_sensor,crop=blueberries,plot=2,region=midwest temp=49.8 1472515200000000000
+```
+**Key Concepts** [link](https://archive.docs.influxdata.com/influxdb/v1.2/concepts/key_concepts/)
+
 ```
 # Linux release version
 cat /etc/*-release 
