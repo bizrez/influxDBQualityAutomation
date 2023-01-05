@@ -107,20 +107,32 @@ myMeasurement,tag1=value1,tag2=value2 fieldKey="fieldValue"
 
 XRay Example/JUnit Results
 
-Time Interval #1
-register,testrun=001 executed=10,pass=10,fail=0
-register,testrun=002 executed=10,pass=10,fail=0
-register,testrun=003 executed=10,pass=10,fail=0
+Data Stored in Fields
+Time Interval #1 
+- Measurement=register  
+- Three different test-run's  
+- Filter || Tag by "testrun"
 
-Time Interval #2
-register,testrun=001 executed=10,pass=5,fail=5
-register,testrun=002 executed=10,pass=10,fail=0
-register,testrun=003 executed=10,pass=1,fail=9
+register,testrun=001 executed=10,pass=10,fail=0  
+register,testrun=002 executed=10,pass=10,fail=0  
+register,testrun=003 executed=10,pass=10,fail=0  
 
-Time Interval #3
-register,testrun=001 executed=10,pass=10,fail=0
-register,testrun=002 executed=10,pass=10,fail=0
-register,testrun=003 executed=10,pass=10,fail=0
+Returns the Sum of all testrun's
+from(bucket: "data")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "register")
+  |> group(columns: ["testrun"])
+  |> aggregateWindow(every: v.windowPeriod, fn: sum, createEmpty: false)
+  |> yield(name: "mean")
+  
+Return ths sume of testrun=001
+rom(bucket: "ms-jwt-auth")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "register")
+  |> filter(fn: (r) => r["testrun"] == "001")
+  |> group(columns: ["_field"])
+  |> aggregateWindow(every: v.windowPeriod, fn: sum, createEmpty: false)
+  |> yield(name: "mean")
 
 ```
 
