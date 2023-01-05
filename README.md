@@ -80,14 +80,11 @@ exit
 [https://docs.influxdata.com/influxdb/v2.1/write-data/developer-tools/api/](https://docs.influxdata.com/influxdb/v2.1/write-data/developer-tools/api/)
 ```
 curl --request POST \
-"http://localhost:8086/api/v2/write?org=YOUR_ORG&bucket=YOUR_BUCKET&precision=ns" \
-  --header "Authorization: Token YOUR_API_TOKEN" \
+"https://us-east-1-1.aws.cloud2.influxdata.com/api/v2/write?org=52dc5555563fd3fb&data&precision=ns" \
+  --header "Authorization: Token vvvvvvvvxYP4MJ-zpQYAQE21mQTADV-LjP__Hl3veAwv_jXaFajvXcqR3zHA==" \
   --header "Content-Type: text/plain; charset=utf-8" \
   --header "Accept: application/json" \
-  --data-binary '
-    airSensors,sensor_id=TLM0201 temperature=73.97038159354763,humidity=35.23103248356096,co=0.48445310567793615 1630424257000000000
-    airSensors,sensor_id=TLM0202 temperature=75.30007505999716,humidity=35.651929918691714,co=0.5141876544505826 1630424257000000000
-    '
+  --data-binary 'register,testrun=001 executed=10,pass=10,fail=0'
 ```
 
 ### Data Concept
