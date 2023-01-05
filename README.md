@@ -95,6 +95,17 @@ curl --location --request GET 'https://us-east-1-1.aws.cloud2.influxdata.com/api
 --data-raw ''
 ```
 
+**BEST BET** So much easier than encoding the JSON string. Returns CSV
+Query Content-Type application/vnd.flux
+```
+curl --location --request POST 'https://us-east-1-1.aws.cloud2.influxdata.com/api/v2/query' \
+--header 'Authorization: Token vvvvvvvxYP4MJ-zpQYAQE21mQTADV-LjP__Hl3veAwv_jXaFajvXcqR3zHA==' \
+--header 'Content-Type: application/vnd.flux' \
+--data-raw 'from(bucket:"data") |> range(start:-30d)
+            |> filter(fn: (r) => r["_measurement"] == "register")'
+
+```
+
 ### Data Concept
 ```
 Line Protocal
