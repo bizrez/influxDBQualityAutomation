@@ -151,7 +151,61 @@ rom(bucket: "ms-jwt-auth")
   |> yield(name: "mean")
 
 ```
+Example of Office Script
+- Uses Fetch to callout Influxdb
+- Content-Type: application/vnd.flux
+- Raw data is the Fluxquery
+- Parse the CSV results into an Array
+- Array is Saved in an Excel sheet
 
+``` 
+function main(workbook: ExcelScript.Workbook) {
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "Token QYAQE21mQTADV-LjP__Hl3veAwv_jXaFajvXcqR3zHA==");
+  myHeaders.append("Content-Type", "application/vnd.flux");
+
+  var raw = "from(bucket:\"ms-jwt-auth\") |> range(start:-365d)\n|> filter(fn: (r) => r[\"_measurement\"] == \"register\")";
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+
+  await fetch("https://us-east-1-1.aws.cloud2.influxdata.com/api/v2/query", requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      
+      result = result.split('\n')
+      result = result.map((row) => row.split(','));
+      result.forEach((element) => {
+        console.log(element);
+      });
+      
+      //Declare the worksheet to paste the data to
+      let ws = workbook.getWorksheet("data")
+      //Clear the existing worksheet data
+      ws.getRange().clear(ExcelScript.ClearApplyTo.all)
+      //Declare the range to paste the data to
+      let rng = ws.getRange("A1").getAbsoluteResizedRange(result.length, result[0].length)
+
+      //Paste the data
+      rng.setValues(result);
+
+      
+    }
+      
+    
+    )
+    .catch(error => console.log('error', error));
+
+  console.log('function end')
+
+}
+```
 Executed 365 days
 
 <img width="341" alt="image" src="https://user-images.githubusercontent.com/993459/210431517-69e87edc-30b3-491c-adcd-b6b667cdd44b.png">
